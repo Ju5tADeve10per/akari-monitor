@@ -9,7 +9,7 @@ def upsert_client(client_id, timestamp):
     If it already exists, the last_timestamp will be updated.
 
     Args:
-        client_di (str): Unique identifier for the client
+        client_id (str): Unique identifier for the client
         timestamp (int | float): Last received timestamp (Unix time)
     
     Returns:
@@ -30,3 +30,16 @@ def get_client(client_id):
         dict | None: Client data if exists, otherwise None
     """
     return clients.get(client_id)
+
+
+def cleanup_client(client_id):
+    """
+    Delete a client entry by client_id.
+
+    Args:
+        client_id (str): Unique identifier for the client
+    
+    Returns:
+        dict | None: Client data if the client existed, otherwise None
+    """
+    return clients.pop(client_id, None)
