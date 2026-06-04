@@ -1,3 +1,8 @@
+import time
+
+# 24 hours in seconds
+TIMELIMIT = 60 * 60 * 24
+
 # client_id -> client state
 clients = {}
 
@@ -31,7 +36,6 @@ def get_client(client_id):
     """
     return clients.get(client_id)
 
-
 def cleanup_client(client_id):
     """
     Delete a client entry by client_id.
@@ -43,3 +47,15 @@ def cleanup_client(client_id):
         dict | None: Client data if the client existed, otherwise None
     """
     return clients.pop(client_id, None)
+
+def is_alive(client_id):
+    """
+    Check if a signal has been received within the time limit.
+
+    Args:
+        client_id (str): Unique identifier for the client
+    
+    Returns:
+        bool: True if within 24 hours, otherwise False
+    """
+    return time.time() - clients[client_id]["last_timestamp"] <= TIMELIMIT
