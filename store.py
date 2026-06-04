@@ -6,7 +6,7 @@ TIMELIMIT = 60 * 60 * 24
 # client_id -> client state
 clients = {}
 
-def upsert_client(client_id, timestamp):
+def upsert_client(client_id: str, timestamp: int | float) -> None:
     """
     Register or update a client entry.
 
@@ -24,7 +24,7 @@ def upsert_client(client_id, timestamp):
         "last_timestamp": timestamp
     }
 
-def get_client(client_id):
+def get_client(client_id: str) -> dict | None:
     """
     Retrieve a client entry by client_id.
 
@@ -36,7 +36,7 @@ def get_client(client_id):
     """
     return clients.get(client_id)
 
-def cleanup_client(client_id):
+def cleanup_client(client_id: str) -> dict | None:
     """
     Delete a client entry by client_id.
 
@@ -48,7 +48,7 @@ def cleanup_client(client_id):
     """
     return clients.pop(client_id, None)
 
-def is_alive(client_id):
+def is_alive(client_id: str) -> bool:
     """
     Check if a signal has been received within the time limit.
 
