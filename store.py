@@ -43,3 +43,6 @@ def is_alive(client_id: str) -> bool:
     if client_id not in clients:
         raise KeyError(f"client not found: {client_id}")
     return time.time() - clients[client_id]["last_timestamp"] <= TIMELIMIT
+
+def get_clients():
+    return clients
