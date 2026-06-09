@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from store import upsert_client, is_alive, get_clients
+import copy
 
 bp = Blueprint("routes", __name__)
 
@@ -16,12 +17,11 @@ def handle_signal():
     return {"success": "ok"}, 200
 
 def get_clients_status():
-    # clientsを取得
     clients_data = get_clients()
-    # clientsをベースにループでis_aliveを呼び、返り値を返す。（管理UI上での正常に信号が来てるのか結果）
+    clients_formatted_data = {}
+
     for client_id in clients_data:
-        # TODO: ループ内でresponseを新たな項目に加えたclients_dataをベースにした新たなデータ構造を作って返す処理をする。
-        # clientsにある各clientデータとis_aliveの呼び出し結果を一つのデータ構造にする。
-        clients_data[client_id]["response"] = is_alive(client_id)
-    # その新たなデータをreturnする。
-    return clients_data
+        clients_formatted_data[client_id] = clients_data[client_id].copy() #前提となる定義したデータ構造が、単階層なのでこのコピーで大丈夫
+        clients_formatted_data[client_id]["response"] = is_alive(client_id)
+
+    return clients_formatted_data
