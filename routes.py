@@ -1,6 +1,5 @@
 from flask import Blueprint, request
 from store import upsert_client, is_alive, get_clients
-import copy
 
 bp = Blueprint("routes", __name__)
 
