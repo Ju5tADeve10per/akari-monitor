@@ -44,5 +44,17 @@ def is_alive(client_id: str) -> bool:
         raise KeyError(f"client not found: {client_id}")
     return time.time() - clients[client_id]["last_timestamp"] <= TIMELIMIT
 
-def get_clients():
+def get_clients() -> dict[str, dict[str, int]]:
+    """
+    Return the clients data managed in this module.
+
+    Returns:
+        dict[str, dict[str, int]]: Mapping of client_id to client state
+    
+    Notes:
+        This functin acts as a wrapper to prevent direct access to the global `clients` dictionary from other modules.
+        Callers should treat the returned object as read-only.
+
+        Currently used by routes.get_clients_status.
+    """
     return clients
