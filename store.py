@@ -3,8 +3,11 @@ import time
 # 24 hours in seconds
 TIMELIMIT = 60 * 60 * 24
 
-# client_id -> client state
-clients = {}
+# client_id (str) -> client state
+# client state: {
+#     "last_timestamp": float | int # Unix timestamp in seconds (same format as time.time())
+# }
+clients: dict[str, dict[str, float | int]] = {}
 
 def upsert_client(client_id: str, timestamp: int | float) -> None:
     """
