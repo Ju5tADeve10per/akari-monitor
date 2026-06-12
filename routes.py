@@ -1,10 +1,18 @@
 from flask import Blueprint, request
 from store import upsert_client, is_alive, get_clients
 
+# Define a Blueprint to group related routes
 bp = Blueprint("routes", __name__)
 
+# Register POST /signal endpoint and map it to handle_signal
 @bp.route("/signal", methods=["POST"])
-def handle_signal():
+def handle_signal() -> tuple[dict, int]:
+    """
+    Receive client signal and update its state.
+    
+    Returns:
+        tuple[dict, int]: JSON response and HTTP status code
+    """
     client_data = request.json
     if client_data is None:
         return {"error": "request body must be JSON"}, 400
@@ -15,12 +23,19 @@ def handle_signal():
     upsert_client(client_id, timestamp)
     return {"success": "ok"}, 200
 
-def get_clients_status():
+def get_clients_status() -> dict[str, dict[str, float | int | bool]]:
+    """
+    Get all clients and attach their alive status.
+    
+    Returns:
+        dict[str, dict[str, float | int | bool]]:
+            Clients data with additional "response" field indicating alive status
+    """
     clients_data = get_clients()
     clients_formatted_data = {}
 
     for client_id in clients_data:
-        clients_formatted_data[client_id] = clients_data[client_id].copy() #前提となる定義したデータ構造が、単階層なのでこのコピーで大丈夫
+        clients_formatted_data[client_id] = clients_data[client_id].copy() # shallow copy is enough because the data structure is single-layer
         clients_formatted_data[client_id]["response"] = is_alive(client_id)
 
     return clients_formatted_data
