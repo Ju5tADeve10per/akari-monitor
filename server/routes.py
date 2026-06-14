@@ -25,25 +25,25 @@ def handle_signal() -> tuple[dict, int]:
 
 # Register GET /clients endpoint and map it to handle_request
 @bp.route("/clients", methods=["GET"])
-def list_clients() -> tuple[dict[str, dict[str, float | int | bool]], int]:
+def list_clients() -> tuple[dict[str, dict[str, int | bool]], int]:
     """
     Return all clients with their alive status.
 
     This endpoint is used by the management UI to fetch current client states.
 
     Returns:
-        tuple[dict[str, dict[str, float | int | bool]], int]: 
+        tuple[dict[str, dict[str, int | bool]], int]: 
             Mapping of client_id to client data (including "response" field)
             with HTTP 200 status code.
     """
     return get_clients_status(), 200
     
-def get_clients_status() -> dict[str, dict[str, float | int | bool]]:
+def get_clients_status() -> dict[str, dict[str, int | bool]]:
     """
     Get all clients and attach their alive status.
     
     Returns:
-        dict[str, dict[str, float | int | bool]]:
+        dict[str, dict[str, int | bool]]:
             Clients data with additional "response" field indicating alive status
     """
     clients_data = get_clients()

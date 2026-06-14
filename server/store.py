@@ -5,11 +5,11 @@ TIMELIMIT = 60 * 60 * 24
 
 # client_id (str) -> client state
 # client state: {
-#     "last_timestamp": float | int # Unix timestamp in seconds (same format as time.time())
+#     "last_timestamp": int # Unix timestamp in seconds (same format as time.time())
 # }
-clients: dict[str, dict[str, float | int]] = {}
+clients: dict[str, dict[str, int]] = {}
 
-def upsert_client(client_id: str, timestamp: int | float) -> None:
+def upsert_client(client_id: str, timestamp: int) -> None:
     """
     Register or update a client entry.
 
@@ -18,7 +18,7 @@ def upsert_client(client_id: str, timestamp: int | float) -> None:
 
     Args:
         client_id (str): Unique identifier for the client
-        timestamp (int | float): Last received timestamp (Unix time)
+        timestamp (int): Last received timestamp (Unix time)
     
     Returns:
         None
