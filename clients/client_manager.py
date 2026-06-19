@@ -16,6 +16,9 @@ def create_client():
     result = send_post_request(url, data)
     return result
 
+def send_client_heartbeat(client_id):
+    pass
+
 def get_current_clients():
     return current_clients
 
