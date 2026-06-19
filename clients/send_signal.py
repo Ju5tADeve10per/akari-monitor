@@ -1,7 +1,7 @@
 import requests
 import time
 
-url = "http://localhost:8000/signal"
+# url = "http://localhost:8000/signal"
 
 # data = {
 #     "id": "client_1",
@@ -11,5 +11,5 @@ url = "http://localhost:8000/signal"
 def send_post_request(url, data):
     return requests.post(url, json=data)
 
-def display_resonse_status(res):
+def display_response_status(res):
     print(res.status_code, res.text)

@@ -5,18 +5,20 @@
 # 4. 特定のクライアントのデータを消す。(これはあとでやる。サーバ側でも書く必要があるため)
 
 def main():
-    do {
+    while (1) {
         print("What do you wanna do?")
         print("1. Make a new client\n2. Send a new signal from existed client\n3. Check all clients\n4. Nah, I'm good.")
-        res = input(int)
+        res = int(input())
         if res == 1:
-            pass
+            # input client id
+            # show the result
         elif res == 2:
             pass
         elif res == 3:
-            pass
+            # display current client list
         elif res == 4:
             print("Seeya")
+            exit
         else:
-            print("Wrong Input")
-    } while (res != 4)
+            print("Invalid Input. Try again")
+    }
