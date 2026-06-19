@@ -12,7 +12,7 @@ def create_client():
     client_id = input()
     get_current_clients().append(client_id)
     data = make_post_request(client_id)
-    url = "http://localhost:8000/signal"
+    url = "http://localhost:8000/signal" # これはグローバルな定数で固定すると良いかも。
     result = send_post_request(url, data)
     return result
 
