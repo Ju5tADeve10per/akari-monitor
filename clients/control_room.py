@@ -13,7 +13,9 @@ def main():
             # input client id
             # show the result
         elif res == 2:
-            pass
+            # クライアントリストからクライアントを選ぶ
+            # send_client_heartbeatを使うことでシグナルをサーバに送る。
+            # show the result
         elif res == 3:
             # display current client list
         elif res == 4:
