@@ -1,26 +1,32 @@
-from make_post_request import make_post_request
+from request_builder import make_post_request
 from send_signal import send_post_request
+
+URL = "http://localhost:8000/signal"
 
 # current_clients = [
 #   "client1",
 #   "client2"
 #]
-current_clients = []
+current_clients = [] # TODO: データ構造上重複するけどどうする？
 
-def create_client():
+def create_client(client_id: str): # この関数はクライアントを登録する。それはサーバ側にも最初の信号を送ることを含む。
     # input client info -> id
-    client_id = input()
-    get_current_clients().append(client_id)
+    get_current_clients().append(client_id) # これだと
     data = make_post_request(client_id)
-    url = "http://localhost:8000/signal" # これはグローバルな定数で固定すると良いかも。
-    result = send_post_request(url, data)
+    result = send_post_request(URL, data)
     return result
 
 def send_client_heartbeat(client_id):
-    pass
+    data = make_post_request(client_id)
+    result = send_post_request(URL, data)
+    return result
 
 def get_current_clients():
     return current_clients
 
 def show_client_list():
-    print(current_clients)
+    client_list = get_current_clients()
+    client_no = 0
+    for client_id in client_list:
+        print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
+        client_no += 1
