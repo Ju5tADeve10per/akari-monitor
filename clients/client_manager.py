@@ -30,3 +30,18 @@ def show_client_list():
     for client_id in client_list:
         print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
         client_no += 1
+
+# client_manager.py
+Client {
+    1. send_client_heartbeat
+    2. make_post_request
+    3. クライアント自身の情報。idと最後のタイムスタンプを持ち管理する関数
+}
+
+create_client
+add_client
+show_client_list
+
+# send_signal.py
+send_post_request
+display_response_status
