@@ -38,9 +38,12 @@ Client {
     3. クライアント自身の情報。idと最後のタイムスタンプを持ち管理する関数
 }
 
-create_client
-add_client
-show_client_list
+ClientManager {
+    create_client: 新規クライアントを登録するため
+    add_client: create_clientから呼ばれる。グローバル変数であるcurrent_clientsに何かを追加する場合は必ず、この関数を通す
+    show_client_list
+    delete_client: グローバル変数であるcurrent_clientsから何かを削除する場合は必ず、この関数を通す
+}
 
 # send_signal.py
 send_post_request
