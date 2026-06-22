@@ -1,5 +1,6 @@
 from request_builder import make_post_request
 from send_signal import send_post_request
+import time
 
 URL = "http://localhost:8000/signal"
 
@@ -30,6 +31,13 @@ def show_client_list():
     for client_id in client_list:
         print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
         client_no += 1
+
+def make_post_request(client_id: str) -> dict:
+    data = {
+        "id": client_id,
+        "timestamp": int(time.time())
+    }
+    return data
 
 # client_manager.py
 Client {
