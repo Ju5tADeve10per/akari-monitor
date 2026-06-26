@@ -25,8 +25,11 @@ class ClientManager:
     def list_client_ids(self):
         if not self.client_list:
             print("No clients registered.")
-        for client_no, client_id in enumerate(sorted(self.client_list), start=1):
+            return []
+        clients = sorted(self.client_list.items())
+        for client_no, (client_id, _) in enumerate(clients, start=1):
             print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
+        return clients
 
 class Client:
     def __init__(self, client_id):

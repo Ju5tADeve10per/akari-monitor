@@ -23,6 +23,7 @@ def control_tower(manager):
                 print("register failed. Check if the client is already existed.")
         elif res == 2:
             # クライアントリストからクライアントを選ぶ
+            manager.list_client_ids()
             # send_client_heartbeatを使うことでシグナルをサーバに送る。
             # show the result
         elif res == 3:
@@ -30,10 +31,10 @@ def control_tower(manager):
             show_client_list()
         elif res == 4:
             print("Seeya")
-            exit() # python的にはこれでループ抜ける？
+            break # python的にはこれでループ抜ける？
         else:
             print("Invalid Input. Try again")
 
-def __name__ == __main__:
+if __name__ == "__main__":
 manager = ClientManager()
 control_tower(manager)
