@@ -26,7 +26,7 @@ class ClientManager:
         if not self.client_list:
             print("No clients registered.")
             return []
-        clients = sorted(self.client_list.items())
+        clients = sorted(self.client_list.items(), key=lambda x:x[0]) #キーでソート
         for client_no, (client_id, _) in enumerate(clients, start=1):
             print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
         return clients

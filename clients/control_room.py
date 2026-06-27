@@ -23,9 +23,21 @@ def control_tower(manager):
                 print("register failed. Check if the client is already existed.")
         elif res == 2:
             # クライアントリストからクライアントを選ぶ
-            manager.list_client_ids()
+            client_list = manager.list_client_ids()
+            if not client_list:
+                break
+            print("Enter the client number:", end="")
+            try:
+                client_no = int(input()) # TODO: ここは数字をきちんと入力後にチェックする必要がある。
+                if client_no < 1 or client_no > len(client_list):
+                    print("Invalid number.")
+                    return
+            except ValueError:
+                print("Invalid Input")
+                return
+            client = client_list[client_no - 1][1] # (key, object)のobjectを取得
             # send_client_heartbeatを使うことでシグナルをサーバに送る。
-            # show the result
+            client.send_client_heartbeat()
         elif res == 3:
             # display current client list
             show_client_list()
