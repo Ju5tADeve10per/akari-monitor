@@ -11,7 +11,7 @@ def control_tower(manager):
     while (1):
         print("What do you wanna do?")
         print("1. Make a new client\n2. Send a new signal from existed client\n3. Check all clients\n4. Nah, I'm good.")
-        res = int(input()) # TODO: 数字以外でクラッシュするのでどうする？
+        res = int(input()) # TODO: 数字以外でクラッシュするのでどうする？ <- isdigit
         if res == 1:
             # input client id
             client_id = input() # return str TODO: need type check?
