@@ -11,10 +11,12 @@ def control_tower(manager):
     while (1):
         print("What do you wanna do?")
         print("1. Make a new client\n2. Send a new signal from existed client\n3. Check all clients\n4. Nah, I'm good.")
-        res = int(input()) # TODO: 数字以外でクラッシュするのでどうする？ <- isdigit
+        input_no = input()
+        # TODO: try, exceptを用いたインプットチェック
         if res == 1:
             # input client id
-            client_id = input() # return str TODO: need type check?
+            client_id = input()
+            # TODO: idのフォーマットが"client_001"のように決まっているので、その入力チェック
             new_client = Client(client_id)
             res = manager.create_client(new_client)
             if res:
@@ -27,10 +29,11 @@ def control_tower(manager):
             if not client_list:
                 break
             print("Enter the client number:", end="")
+            # TODO: ここはisdigitを用いた厳格なチェック
             try:
                 client_no = int(input()) # TODO: ここは数字をきちんと入力後にチェックする必要がある。
                 if client_no < 1 or client_no > len(client_list):
-                    print("Invalid number.")
+                    print("Invalid number")
                     return
             except ValueError:
                 print("Invalid Input")
