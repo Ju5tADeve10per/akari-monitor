@@ -11,40 +11,41 @@ def control_tower(manager):
     while (1):
         print("What do you wanna do?")
         print("1. Make a new client\n2. Send a new signal from existed client\n3. Check all clients\n4. Nah, I'm good.")
-        input_no = input()
-        # TODO: try, exceptを用いたインプットチェック
-        if res == 1:
+        # try, exceptを用いたインプットチェック
+        try:
+            choice = int(input())
+        except ValueError:
+            print("Invalid Input")
+            return
+        if choice == 1:
             # input client id
             client_id = input()
             # TODO: idのフォーマットが"client_001"のように決まっているので、その入力チェック
             new_client = Client(client_id)
-            res = manager.create_client(new_client)
-            if res:
+            choice = manager.create_client(new_client)
+            if choice:
                 print("register successful.")
             else:
                 print("register failed. Check if the client is already existed.")
-        elif res == 2:
+        elif choice == 2:
             # クライアントリストからクライアントを選ぶ
             client_list = manager.list_client_ids()
             if not client_list:
-                break
-            print("Enter the client number:", end="")
-            # TODO: ここはisdigitを用いた厳格なチェック
-            try:
-                client_no = int(input()) # TODO: ここは数字をきちんと入力後にチェックする必要がある。
-                if client_no < 1 or client_no > len(client_list):
-                    print("Invalid number")
-                    return
-            except ValueError:
+                print("There's no client.")
+                continue
+            # isdigitを用いた厳格なチェック
+            client_no = input("Enter the client number: ")
+            client_no = 0 if not client_no.isdigit() else int(client_no)
+            if client_no < 1 or client_no > len(client_list):
                 print("Invalid Input")
-                return
-            client = client_list[client_no - 1][1] # (key, object)のobjectを取得
+                continue
+            _, client = client_list[client_no - 1] # (key, object)のobjectを取得
             # send_client_heartbeatを使うことでシグナルをサーバに送る。
             client.send_client_heartbeat()
-        elif res == 3:
+        elif choice == 3:
             # display current client list
             show_client_list()
-        elif res == 4:
+        elif choice == 4:
             print("Seeya")
             break # python的にはこれでループ抜ける？
         else:
