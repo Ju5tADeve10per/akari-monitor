@@ -1,8 +1,16 @@
-import time
+from time import time
 
 def build_post_request(client_id: str) -> dict:
-    payload = {
+    """
+    Build request body
+
+    Args:
+        client_id (str): client unique id
+    
+    Returns:
+        dict: request body
+    """
+    return {
         "id": client_id,
-        "timestamp": int(time.time())
+        "timestamp": int(time())
     }
-    return payload

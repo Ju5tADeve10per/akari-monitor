@@ -2,11 +2,36 @@ from send_signal import send_post_request, display_response_status
 from payload_builder import build_post_request
 
 class ClientManager:
-    def __init__(self, url):
+    """
+    Manage all clients and handle communication with the server.
+
+    Attributes:
+        client_list (dict): Registered clients mapped by client_id
+        url (str): Server endpoint URL
+    """
+    def __init__(self, url: str) -> None:
+        """
+        Initialise method
+
+        Args:
+            url (str): Server endpoint URL
+        
+        Returns:
+            None
+        """
         self.client_list = {}
         self.url = url
     
-    def _register_new_client(self, client): # boolの結果でfalseなら失敗、そうでなければ成功
+    def _register_new_client(self, client: Client) -> bool: # boolの結果でfalseなら失敗、そうでなければ成功
+        """
+        Register client if they are new.
+
+        Args:
+            client (Client): Expect client to register to client list
+        
+        Returns:
+            bool: True if the client is new, False otherwise
+        """
         if client.id in self.client_list:
             return False
         self.client_list[client.id] = client
