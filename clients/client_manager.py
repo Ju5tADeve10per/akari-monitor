@@ -15,9 +15,6 @@ class ClientManager:
 
         Args:
             url (str): Server endpoint URL.
-        
-        Returns:
-            None
         """
         self.client_list = {}
         self.url = url
@@ -76,9 +73,6 @@ class ClientManager:
 
         Args:
             client (Client): Client already registered in the client list.
-        
-        Returns:
-            None
         """
         payload = build_post_request(client.id)
         result = send_post_request(self.url, payload)

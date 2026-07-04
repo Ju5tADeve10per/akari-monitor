@@ -19,8 +19,5 @@ def display_response_status(res: Response) -> None:
 
     Args:
         res (Response): the response object returned from the server
-    
-    Returns:
-        None
     """
     print(f"{res.status_code} {res.text}")
