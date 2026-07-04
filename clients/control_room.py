@@ -1,9 +1,3 @@
-# ループの中で、選択式でどの行動をするかを選びながら進める
-# 1. 新たなクライアントを作る
-# 2. 既存のクライアントの生存確認のための信号を送る
-# 3. 全クライアントを確認する。
-# 4. 特定のクライアントのデータを消す。(これはあとでやる。サーバ側でも書く必要があるため)
-
 from client_manager import ClientManager, Client
 from send_signal import display_response_status
 import re
@@ -30,10 +24,21 @@ URL = "http://localhost:8000/signal"
 #     return bool(re.fullmatch(r"client_(00[1-9]|0[1-9]\d[1-9]\d\d)", s))
 
 # client_001 - 999 (000は除外)
-def is_valid_client_id(s: str) -> bool:
-    return bool(re.fullmatch(r"client_(?!000)\d{3}"))
+def is_valid_client_id(client_id: str) -> bool:
+    """
+    Check if the client is a valid format.
 
-def control_tower(manager):
+    Args:
+        client_id (str): target client id for valid check.
+    
+    Returns:
+        bool: True if it is right format, False otherwise.
+    """
+    return bool(re.fullmatch(r"client_(?!000)\d{3}", s))
+
+def control_tower(manager: ClientManager) -> None:
+    """
+    """
     while True:
         print("What do you wanna do?")
         print("1. Make a new client\n2. Send a new signal from existed client\n3. Check all clients\n4. Nah, I'm good.")
@@ -41,20 +46,20 @@ def control_tower(manager):
         try:
             choice = int(input())
         except ValueError:
-            print("Invalid Input")
+            print("Invalid Input.")
             return
         if choice == 1:
             client_id = input("Enter client id (client_001 ~ 999): ")
             # idのフォーマットが"client_001"のように決まっているので、その入力チェック
             if not is_valid_client_id(client_id):
-                print("Invalid Input")
+                print("Invalid Input.")
                 continue
             new_client = Client(client_id)
             choice = manager.create_client(new_client)
             if choice:
-                print("register successful.")
+                print("Register successful.")
             else:
-                print("register failed. Check if the client is already existed.")
+                print("Register failed. Check if the client is already existed.")
         elif choice == 2:
             # クライアントリストからクライアントを選ぶ
             client_list = manager.list_client_ids()
@@ -78,6 +83,7 @@ def control_tower(manager):
         else:
             print("Invalid Input. Try again")
 
+# Initialise manager and start control loop when run directly
 if __name__ == "__main__":
     manager = ClientManager(URL)
     control_tower(manager)
