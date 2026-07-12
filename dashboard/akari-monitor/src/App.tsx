@@ -1,8 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
+type Client = {
+  last_timestamp: number;
+  response: boolean;
+};
+
+type Clients = Record<string, Client>;
+
 function App() {
-  const [clients, setClients] = useState(null);
+  const [clients, setClients] = useState<Clients | null>(null);
 
   async function fetchClients() {
     // TODO: serverが落ちてる場合はそもそもfetchできないので、try, catchで捕まえる
@@ -30,9 +37,25 @@ function App() {
 
   return (
     <main>
-      <h1>Akari Monitor</h1>
+      {clients &&
+        Object.entries(clients).map(([id, data]) => {
+          return (
+            <div key={id}>
+              <p>{id}</p>
+              <p>{data.last_timestamp}</p>
+              <p>{data.response ? "OK" : "NG"}</p>
+            </div>
+          );
+        })}
     </main>
   );
 }
 
 export default App;
+
+// clients = {
+//   client_id: {
+//     "last_timestamp": int
+//     "response": bool
+//   }
+// }
