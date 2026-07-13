@@ -33,6 +33,11 @@ function App() {
 
   if (clients == null) {
     // Loadingのことを書く。
+    return (
+      <main>
+        <p>Loading...</p>
+      </main>
+    );
   }
 
   return (
