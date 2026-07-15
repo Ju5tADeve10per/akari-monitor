@@ -1,6 +1,9 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
+// Import Mock Data
+import { mockClients } from "./mockData";
+
 type Client = {
   last_timestamp: number;
   response: boolean;
@@ -9,21 +12,31 @@ type Client = {
 type Clients = Record<string, Client>;
 
 function App() {
-  const [clients, setClients] = useState<Clients | null>(null);
+  /* 下二行を切り替えてcssのテストを行う。*/
+  // const [clients, setClients] = useState<Clients | null>(null);
+  const [clients, setClients] = useState<Clients | null>(mockClients);
 
   async function fetchClients() {
-    // TODO: serverが落ちてる場合はそもそもfetchできないので、try, catchで捕まえる
-    const res = await fetch("http://localhost:8000/clients");
-    if (!res.ok) {
-      console.error("Failed to fetch");
-    }
-    else {
+    try {
+      const res = await fetch("http://localhost:8000/clients");
+      if (!res.ok) {
+        throw new Error("HTTP error")
+      }
       const data = await res.json();
       setClients(data);
+    } catch (error) {
+      if (error instanceof TypeError) {
+        console.error("Network Error");
+      }
+      else {
+        console.error(error)
+      }
     }
   }
 
   useEffect(() => {
+    fetchClients()
+
     const id = setInterval(fetchClients, 30000);
 
     return () => {
@@ -32,7 +45,6 @@ function App() {
   }, []);
 
   if (clients == null) {
-    // Loadingのことを書く。
     return (
       <main>
         <p>Loading...</p>
@@ -57,10 +69,3 @@ function App() {
 }
 
 export default App;
-
-// clients = {
-//   client_id: {
-//     "last_timestamp": int
-//     "response": bool
-//   }
-// }
