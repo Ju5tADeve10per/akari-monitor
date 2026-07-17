@@ -47,20 +47,25 @@ function App() {
   if (clients == null) {
     return (
       <main>
-        <p>Loading...</p>
+        <p id="loading">Loading...</p>
       </main>
     );
   }
 
   return (
     <main>
+      <div className="header">
+        <p>Client ID</p>
+        <p>Last Heartbeat</p>
+        <p>Alive Status</p>
+      </div>
       {clients &&
         Object.entries(clients).map(([id, data]) => {
           return (
             <div key={id}>
-              <p>{id}</p>
-              <p>{data.last_timestamp}</p>
-              <p>{data.response ? "OK" : "NG"}</p>
+              <p className="client_id">{id}</p>
+              <p className="timestamp">{data.last_timestamp}</p>
+              <p className={data.response ? "ok" : "ng"}>{data.response ? "SUCCESS" : "FAILURE"}</p>
             </div>
           );
         })}

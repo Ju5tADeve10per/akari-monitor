@@ -1,17 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
 
-  color: #0f0f0f;
-  background-color: #f6f6f6;
+  --basic-text: #f6f6f6;
+  --background: #0f0f0f;
+  --status-ok: #00ff00;
+  --status-ng: #f44336;
+  --header-text: #5f636d;
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--background);
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  display: flex;
+  color: var(--header-text);
+}
+
+div {
+  display: flex;
+  gap: 2.5rem;
+}
+
+div > p {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.loading {
+  color: var(--basic-text);
+}
+
+.client_id {
+  color: var(--basic-text);
+}
+
+.timestamp {
+  color: var(--basic-text);
+}
+
+.ok {
+  color: var(--status-ok);
+}
+
+.ng {
+  color: var(--status-ng)
 }
 
 @media (prefers-color-scheme: dark) {
