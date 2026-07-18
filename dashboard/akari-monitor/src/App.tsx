@@ -13,8 +13,8 @@ type Clients = Record<string, Client>;
 
 function App() {
   /* 下二行を切り替えてcssのテストを行う。*/
-  // const [clients, setClients] = useState<Clients | null>(null);
-  const [clients, setClients] = useState<Clients | null>(mockClients);
+  const [clients, setClients] = useState<Clients | null>(null);
+  // const [clients, setClients] = useState<Clients | null>(mockClients);
 
   async function fetchClients() {
     try {
@@ -46,14 +46,14 @@ function App() {
 
   if (clients == null) {
     return (
-      <main>
+      <main id="loading-container">
         <p id="loading">Loading...</p>
       </main>
     );
   }
 
   return (
-    <main>
+    <main id="client-dashboard">
       <div className="header">
         <p>Client ID</p>
         <p>Last Heartbeat</p>
@@ -64,7 +64,7 @@ function App() {
           return (
             <div key={id}>
               <p className="client_id">{id}</p>
-              <p className="timestamp">{data.last_timestamp}</p>
+              <p className="timestamp">{new Date(data.last_timestamp * 1000).toLocaleString("ja-JP")}</p>
               <p className={data.response ? "ok" : "ng"}>{data.response ? "SUCCESS" : "FAILURE"}</p>
             </div>
           );

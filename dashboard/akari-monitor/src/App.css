@@ -10,11 +10,13 @@
   line-height: 24px;
   font-weight: 400;
 
-  --basic-text: #f6f6f6;
+  --basic-text: #b9b9b9;
+  --border-line: #52503d;
   --background: #0f0f0f;
   --status-ok: #00ff00;
   --status-ng: #f44336;
   --header-text: #5f636d;
+  --main-background: #1a1919;
 
 
   font-synthesis: none;
@@ -28,11 +30,29 @@ body {
   background-color: var(--background);
 }
 
-main {
+#client-dashboard {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin: 2.5rem 1.5rem;
   gap: 1.5rem;
+  border: 1px solid var(--border-line);
+  border-radius: 10px;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--main-background);
+}
+
+/* For loading */
+#loading {
+  color: var(--basic-text);
+  text-align: center;
+}
+
+/* For displaying client data */
+#client-dashboard > div:not(:last-child) {
+  border-bottom: 1px solid var(--border-line);
+  padding-bottom: 1.5rem;
 }
 
 .header {
@@ -49,10 +69,6 @@ div > p {
   flex: 1;
   text-align: center;
   font-size: 1.5rem;
-}
-
-.loading {
-  color: var(--basic-text);
 }
 
 .client_id {
