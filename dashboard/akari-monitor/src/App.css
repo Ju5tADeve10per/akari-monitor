@@ -30,6 +30,21 @@ body {
   background-color: var(--background);
 }
 
+/* For loading */
+#loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+#loading {
+  color: var(--basic-text);
+  text-align: center;
+}
+
+/* For displaying client data */
 #client-dashboard {
   width: 100%;
   display: flex;
@@ -43,13 +58,6 @@ body {
   background-color: var(--main-background);
 }
 
-/* For loading */
-#loading {
-  color: var(--basic-text);
-  text-align: center;
-}
-
-/* For displaying client data */
 #client-dashboard > div:not(:last-child) {
   border-bottom: 1px solid var(--border-line);
   padding-bottom: 1.5rem;
