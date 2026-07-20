@@ -17,6 +17,7 @@
   --status-ng: #f44336;
   --header-text: #5f636d;
   --main-background: #1a1919;
+  --size: 50;
 
 
   font-synthesis: none;
@@ -39,9 +40,33 @@ body {
   height: 100vh;
 }
 
-#loading {
+.scene {
+  perspective: 500px;
+  transform: translate(calc(var(--size) * 0.7px), 0) rotateX(-30deg) rotateY(45deg);
+}
+
+.letter {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  position: absolute;
   color: var(--basic-text);
   text-align: center;
+  height: calc(var(--size) * 1px);
+  width: calc(var(--size) * 1px);
+  left: 50%;
+  top: 50%;
+}
+
+.front {
+  transform: translate3d(-50%, -50%, calc(var(--size) * 0.5px));
+}
+
+.back {
+  transform: translate3d(-50%, -50%, calc(var(--size) * -0.5px));
 }
 
 /* For displaying client data */

@@ -47,7 +47,14 @@ function App() {
   if (clients == null) {
     return (
       <main id="loading-container">
-        <p id="loading">Loading...</p>
+        <div className="scene">
+          {"Loading".split("").map((char, i) => (
+            <span className="letter" key={i}>
+              <span className="front">{char}</span>
+              <span className="back">{char}</span>
+            </span>
+          ))}
+        </div>
       </main>
     );
   }
