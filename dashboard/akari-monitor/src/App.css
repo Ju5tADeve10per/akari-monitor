@@ -45,9 +45,17 @@ body {
   transform: translate(calc(var(--size) * 0.7px), 0) rotateX(-30deg) rotateY(45deg);
 }
 
+.word {
+  display: inline-flex;
+}
+
+.letter__wrap {
+  position: relative; /* TODO: こいつの使いどころをチェック */
+  transform-style: preserve-3d;
+}
+
 .letter {
   position: relative;
-  transform-style: preserve-3d;
 }
 
 .front,

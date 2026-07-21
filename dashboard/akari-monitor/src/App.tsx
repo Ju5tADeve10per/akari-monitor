@@ -48,12 +48,16 @@ function App() {
     return (
       <main id="loading-container">
         <div className="scene">
-          {"Loading".split("").map((char, i) => (
-            <span className="letter" key={i}>
-              <span className="front">{char}</span>
-              <span className="back">{char}</span>
-            </span>
-          ))}
+          <div className="word">
+            {"Loading".split("").map((char, i) => (
+              <span className="letter__wrap" key={i}>
+                <span className="letter">
+                  <span className="front">{char}</span>
+                  <span className="back">{char}</span>
+                </span>
+              </span>
+            ))}
+          </div>
         </div>
       </main>
     );
