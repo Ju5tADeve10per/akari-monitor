@@ -45,15 +45,20 @@ function App() {
   }, []);
 
   if (clients == null) {
+    const one = "Loading";
+    const two = "Wait...";
     return (
       <main id="loading-container">
         <div className="scene">
           <div className="word">
-            {"Loading".split("").map((char, i) => (
-              <span className="letter__wrap" key={i}>
+            {one.split("").map((char, i) => (
+              <span className="letter__wrap" key={i} style={{ animationDelay: `${i * 0.1}s`}}>
                 <span className="letter">
-                  <span className="front">{char}</span>
-                  <span className="back">{char}</span>
+                  <span className="letter__panel">{char}</span>
+                  <span className="letter__panel">{two[i]}</span>
+                  <span className="letter__panel">{char}</span>
+                  <span className="letter__panel">{two[i]}</span>
+                  <span className="letter__panel"></span>
                 </span>
               </span>
             ))}

@@ -52,14 +52,15 @@ body {
 .letter__wrap {
   position: relative; /* TODO: こいつの使いどころをチェック */
   transform-style: preserve-3d;
+  animation: rotateLetter 2s linear infinite;
 }
 
 .letter {
   position: relative;
+  font-size: 3.5rem;
 }
 
-.front,
-.back {
+.letter__panel {
   position: absolute;
   color: var(--basic-text);
   text-align: center;
@@ -69,12 +70,24 @@ body {
   top: 50%;
 }
 
-.front {
-  transform: translate3d(-50%, -50%, calc(var(--size) * 0.5px));
+.letter__panel:nth-of-type(1) {
+  /**/
 }
 
-.back {
-  transform: translate3d(-50%, -50%, calc(var(--size) * -0.5px));
+.letter__panel:nth-of-type(2) {
+  /**/
+}
+
+.letter__panel:nth-of-type(3) {
+  /**/
+}
+
+.letter__panel:nth-of-type(4) {
+  /**/
+}
+
+.letter__panel:nth-of-type(5) {
+  /**/
 }
 
 /* For displaying client data */
@@ -132,5 +145,17 @@ div > p {
   :root {
     color: #f6f6f6;
     background-color: #2f2f2f;
+  }
+}
+
+@keyframes rotateLetter {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: rotateX(180deg) rotateY(180deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg);
   }
 }
