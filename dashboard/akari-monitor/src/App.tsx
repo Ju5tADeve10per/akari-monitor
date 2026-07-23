@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Import Mock Data
 import { mockClients } from "./mockData";
@@ -52,7 +52,7 @@ function App() {
         <div className="scene">
           <div className="word">
             {one.split("").map((char, i) => (
-              <span className="letter__wrap" key={i} style={{ animationDelay: `${i * 0.1}s`}}>
+              <span className="letter__wrap" key={i} style={{ "--index": i } as React.CSSProperties}>
                 <span className="letter">
                   <span className="letter__panel">{char}</span>
                   <span className="letter__panel">{two[i]}</span>

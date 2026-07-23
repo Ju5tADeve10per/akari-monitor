@@ -18,6 +18,7 @@
   --header-text: #5f636d;
   --main-background: #1a1919;
   --size: 50;
+  --stagger: 0.1125;
 
 
   font-synthesis: none;
@@ -42,22 +43,28 @@ body {
 
 .scene {
   perspective: 500px;
-  transform: translate(calc(var(--size) * 0.7px), 0) rotateX(-30deg) rotateY(45deg);
 }
 
 .word {
   display: inline-flex;
+  transform: translate(calc(var(--size) * 0.7px), 0) rotateX(-30deg) rotateY(45deg);
+  transform-style: preserve-3d;
 }
 
 .letter__wrap {
   position: relative; /* TODO: こいつの使いどころをチェック */
   transform-style: preserve-3d;
+  transform-origin: bottom center;
   animation: rotateLetter 2s linear infinite;
+  animation-delay: calc(var(--stagger) * var(--index) * 1s);
 }
 
 .letter {
   position: relative;
   font-size: 3.5rem;
+  transform-style: preserve-3d;
+  height: calc(var(--size) * 1px);
+  width: calc(var(--size) * 1px)
 }
 
 .letter__panel {
@@ -68,26 +75,46 @@ body {
   width: calc(var(--size) * 1px);
   left: 50%;
   top: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* 正面 */
 .letter__panel:nth-of-type(1) {
-  /**/
+  transform: translate3d(-50%, -50%, calc(var(--size) * 0.5px));
 }
 
+/* 上 */
 .letter__panel:nth-of-type(2) {
-  /**/
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotateX(90deg)
+    translate3d(0, 0, calc(var(--size) * 0.5px));
 }
 
+/* 背面 */
 .letter__panel:nth-of-type(3) {
-  /**/
+  transform:
+    translate3d(-50%, -50%, calc(var(--size) * -0.5px))
+    rotateY(180deg);
 }
 
+/* 下 */
 .letter__panel:nth-of-type(4) {
-  /**/
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotateX(-90deg)
+    translate3d(0, 0, calc(var(--size) * 0.5px));
 }
 
+/* 側面 */
 .letter__panel:nth-of-type(5) {
-  /**/
+  transform:
+    translate3d(-50%, -50%, 0)
+    rotateY(-90deg)
+    translate3d(0, 0, calc(var(--size) * 0.5px));
 }
 
 /* For displaying client data */
