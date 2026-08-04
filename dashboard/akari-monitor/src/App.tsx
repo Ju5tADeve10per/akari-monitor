@@ -45,25 +45,9 @@ function App() {
   }, []);
 
   if (clients == null) {
-    const one = "Loading";
-    const two = "Wait...";
     return (
       <main id="loading-container">
-        <div className="scene">
-          <div className="word">
-            {one.split("").map((char, i) => (
-              <span className="letter__wrap" key={i} style={{ "--index": i } as React.CSSProperties}>
-                <span className="letter">
-                  <span className="letter__panel">{char}</span>
-                  <span className="letter__panel">{two[i]}</span>
-                  <span className="letter__panel">{char}</span>
-                  <span className="letter__panel">{two[i]}</span>
-                  <span className="letter__panel"></span>
-                </span>
-              </span>
-            ))}
-          </div>
-        </div>
+        <p>Now Loading</p>
       </main>
     );
   }
