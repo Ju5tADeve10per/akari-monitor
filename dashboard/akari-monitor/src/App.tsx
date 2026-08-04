@@ -46,8 +46,10 @@ function App() {
 
   if (clients == null) {
     return (
-      <main id="loading-container">
-        <p>Now Loading</p>
+      <main className="loading-container">
+        <div className="loading">
+          <p>Now Loading</p>
+        </div>
       </main>
     );
   }

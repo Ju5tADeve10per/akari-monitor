@@ -33,6 +33,22 @@ body {
 }
 
 /* For loading */
+.loading-container {
+  border: 1px solid #00ff00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.loading {
+  border: 1px solid #f44336;
+}
+
+.loading {
+  color: var(--basic-text);
+}
 
 /* For displaying client data */
 #client-dashboard {
