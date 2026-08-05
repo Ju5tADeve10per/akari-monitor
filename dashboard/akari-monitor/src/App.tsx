@@ -48,7 +48,9 @@ function App() {
     return (
       <main className="loading-container">
         <div className="loading">
-          <p>Now Loading</p>
+          {"Now Loading".split("").map((char, i) => (
+            <span key={i} style={{ animationDelay: `${i * 0.1}s`}}>{char}</span>
+          ))}
         </div>
       </main>
     );

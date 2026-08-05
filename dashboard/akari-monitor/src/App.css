@@ -19,6 +19,7 @@
   --main-background: #1a1919;
   --size: 50;
   --stagger: 0.1125;
+  --border-loading: #00ff00;
 
 
   font-synthesis: none;
@@ -43,11 +44,55 @@ body {
 }
 
 .loading {
-  border: 1px solid #f44336;
+  color: var(--basic-text);
+  border-radius: 50%;
+  height: 250px;
+  width: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
 }
 
-.loading {
-  color: var(--basic-text);
+.loading span {
+  display: inline-block;
+  font-weight: bold;
+  font-style: italic;
+  font-size: large;
+  margin-top: 5px;
+  animation: floating-character 3s infinite;
+}
+
+.loading::before {
+  content: "";
+  position:absolute;
+  border-radius: 50%;
+  border: 2px solid var(--border-loading);
+  inset: -10px;
+  box-shadow: 
+    0 0 5px var(--border-loading),
+    0 0 10px var(--border-loading);
+
+  animation: floating 2s infinite;
+}
+
+@keyframes floating-character {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes floating {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-3px) }
+  100% { transform: translateY(0); }
 }
 
 /* For displaying client data */
