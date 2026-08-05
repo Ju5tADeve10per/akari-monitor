@@ -9,4 +9,4 @@ app.register_blueprint(bp)
 
 # Run the server only when this file is executed directly
 if __name__ == "__main__":
-    app.run()
+    app.run(port=8000)
