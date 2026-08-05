@@ -1,8 +1,8 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // Import Mock Data
-import { mockClients } from "./mockData";
+// import { mockClients } from "./mockData";
 
 type Client = {
   last_timestamp: number;
