@@ -20,4 +20,5 @@ def display_response_status(res: Response) -> None:
     Args:
         res (Response): the response object returned from the server
     """
-    print(f"{res.status_code} {res.text}")
+    print("\n\033[033mRESPONSE: ")
+    print(f"{res.status_code} {res.text}\033[0m")

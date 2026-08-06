@@ -33,44 +33,63 @@ def control_tower(manager: ClientManager) -> None:
         - Use try/except for general numeric input.
         - Use isdigit() for strict client number validation.
     """
+
+    PURPLE = "\033[95m"
+    CYAN = "\033[36m"
+    GREEN = "\033[032m"
+    YELLOW = "\033[33m"
+    RED = "\033[31m"
+    RESET = "\033[0m"
+
     while True:
-        print("What do you wanna do?")
-        print("1. Make a new client.\n2. Send a new signal from existing client.\n3. Check all clients.\n4. Nah, I'm good.")
+        print(f"\n{PURPLE}What do you wanna do?{RESET}")
+        print(f"{GREEN}1. Make a new client.{RESET}\n{YELLOW}2. Send a new signal from existing client.{RESET}\n{CYAN}3. Check all clients.{RESET}\n{PURPLE}4. Nah, I'm good.{RESET}")
+        print()
         try:
-            choice = int(input())
+            choice = int(input("Select option (1-4): "))
         except ValueError:
-            print("Invalid Input.")
+            print()
+            print(f"{RED}Invalid Input.{RESET}")
             return
         if choice == 1:
-            client_id = input("Enter client ID (client_001 ~ 999): ")
+            print()
+            client_id = input("Enter client ID (e.g. client_007, range: 001-999): ")
             if not is_valid_client_id(client_id):
-                print("Invalid Input.")
+                print()
+                print(f"{RED}Invalid Input.{RESET}")
                 continue
             new_client = Client(client_id)
             choice = manager.create_client(new_client)
             if choice:
-                print("Register successful.")
+                print(f"{GREEN}Register successful.{RESET}")
             else:
-                print("Register failed. Check if the client is already existed.")
+                print(f"{RED}Register failed. Check if the client is already existed.{RESET}")
         elif choice == 2:
             client_list = manager.list_client_ids()
             if not client_list:
-                print("There are no clients.")
+                print()
+                print(f"{RED}No clients registered.{RESET}")
                 continue
-            client_no = input("Enter the client number: ")
+            print()
+            client_no = input("Enter the client number: ") # TODO: more specify about client number e.g. use an example
             client_no = 0 if not client_no.isdigit() else int(client_no)
             if client_no < 1 or client_no > len(client_list):
-                print("Invalid Input")
+                print(f"{RED}Invalid Input{RESET}")
                 continue
             _, client = client_list[client_no - 1] # Retrieve object from (key, object)
             manager.send_client_heartbeat(client)
         elif choice == 3:
-            manager.list_client_ids()
+            client_list = manager.list_client_ids()
+            if not client_list:
+                print()
+                print(f"{RED}No clients registered.{RESET}")
         elif choice == 4:
-            print("Seeya")
+            print()
+            print(f"{PURPLE}Seeya{RESET}\n")
             break
         else:
-            print("Invalid Input. Try again.")
+            print()
+            print(f"{RED}Invalid Input. Try again.{RESET}")
 
 # Initialise manager and start control loop when run directly
 if __name__ == "__main__":
