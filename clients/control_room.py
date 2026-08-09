@@ -60,6 +60,8 @@ def control_tower(manager: ClientManager) -> None:
                 continue
             new_client = Client(client_id)
             choice = manager.create_client(new_client)
+            if choice is None: 
+                break
             if choice:
                 print(f"{GREEN}Register successful.{RESET}")
             else:
@@ -77,7 +79,8 @@ def control_tower(manager: ClientManager) -> None:
                 print(f"{RED}Invalid Input{RESET}")
                 continue
             _, client = client_list[client_no - 1] # Retrieve object from (key, object)
-            manager.send_client_heartbeat(client)
+            if not manager.send_client_heartbeat(client):
+                break
         elif choice == 3:
             client_list = manager.list_client_ids()
             if not client_list:

@@ -29,15 +29,17 @@ function App() {
         console.error("Network Error");
       }
       else {
-        console.error(error)
+        console.error(error);
       }
+
+      setClients(null);
     }
   }
 
   useEffect(() => {
     fetchClients()
 
-    const id = setInterval(fetchClients, 30000);
+    const id = setInterval(fetchClients, 5000);
 
     return () => {
       clearInterval(id)
