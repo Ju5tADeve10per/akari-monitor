@@ -1,7 +1,7 @@
 import time
 
 # 24 hours in seconds
-TIMELIMIT = 60 * 60 * 24
+TIMELIMIT = 60 * 60 * 24 # 現在は24時間に一度シグナルが来てるかどうかチェックしてる。
 
 # client_id (str) -> client state
 # client state: {

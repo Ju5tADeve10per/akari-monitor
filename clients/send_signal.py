@@ -1,6 +1,7 @@
 from requests import post, Response
+from requests.exceptions import RequestException
 
-def send_post_request(url: str, data: dict) -> Response:
+def send_post_request(url: str, data: dict) -> Response | None:
     """
     Send alive signal to the server
 
@@ -11,7 +12,13 @@ def send_post_request(url: str, data: dict) -> Response:
     Returns:
         Response: the response object from the server
     """
-    return post(url, json=data)
+    try:
+        res = post(url, json=data)
+        return res
+    except RequestException:
+        print("Failed to connect to server")
+        return None
+
 
 def display_response_status(res: Response) -> None:
     """
@@ -20,4 +27,5 @@ def display_response_status(res: Response) -> None:
     Args:
         res (Response): the response object returned from the server
     """
-    print(f"{res.status_code} {res.text}")
+    print("\n\033[033mRESPONSE: ")
+    print(f"{res.status_code} {res.text}\033[0m")

@@ -34,7 +34,7 @@ class ClientManager:
         self.client_list[client.id] = client
         return True
 
-    def create_client(self, client: Client) -> bool: # この関数はクライアントを登録する。それはサーバ側にも最初の信号を送ることを含む。
+    def create_client(self, client: Client) -> bool | None:
         """
         Register a new client and send an initial heartbeat to the server.
 
@@ -49,6 +49,9 @@ class ClientManager:
             return False
         payload = build_post_request(client.id)
         result = send_post_request(self.url, payload)
+        if result is None:
+            print("Send failed")
+            return None
         display_response_status(result)
         return True
     
@@ -60,14 +63,13 @@ class ClientManager:
             list[tuple[str, Client]]: Sorted list of (client_id, client) pairs.
         """
         if not self.client_list:
-            print("No clients registered.")
             return []
         clients = sorted(self.client_list.items(), key=lambda x: x[0]) # Sort by client_id
         for client_no, (client_id, _) in enumerate(clients, start=1):
-            print(f"\033[32mNo.{client_no}\033[0m: \033[31m{client_id}\033[0m")
+            print(f"\033[32mNo.{client_no}\033[0m: \033[33m{client_id}\033[0m")
         return clients
     
-    def send_client_heartbeat(self, client: Client) -> None:
+    def send_client_heartbeat(self, client: Client) -> bool:
         """
         Send a heartbeat signal from an existing client to the server.
 
@@ -76,7 +78,11 @@ class ClientManager:
         """
         payload = build_post_request(client.id)
         result = send_post_request(self.url, payload)
+        if result is None:
+            print("Send failed")
+            return False
         display_response_status(result)
+        return True
 
 class Client:
     """

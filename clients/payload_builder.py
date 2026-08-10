@@ -11,6 +11,6 @@ def build_post_request(client_id: str) -> dict:
         dict: request body
     """
     return {
-        "id": client_id,
+        "client_id": client_id,
         "timestamp": int(time())
     }
