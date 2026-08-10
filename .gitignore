@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Rust
+target/
+
+# Node
+node_modules/
+
+# Env
+.env
+
+# OS
+.DS_Store
