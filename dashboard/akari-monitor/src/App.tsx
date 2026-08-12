@@ -1,9 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 
-// Import Mock Data
-// import { mockClients } from "./mockData";
-
 type Client = {
   last_timestamp: number;
   response: boolean;
@@ -11,11 +8,24 @@ type Client = {
 
 type Clients = Record<string, Client>;
 
+/**
+ * This is the main function that is called by itself.
+ * 
+ * Display all current clients data according to the specific format.
+ * 
+ * @returns None
+ */
 function App() {
-  /* 下二行を切り替えてcssのテストを行う。*/
+  /* When App is called by itself, useState is always executed first as a init trigger. */
   const [clients, setClients] = useState<Clients | null>(null);
-  // const [clients, setClients] = useState<Clients | null>(mockClients);
 
+  /**
+   * Summary
+   * 
+   * Description
+   * 
+   * @returns None
+   */
   async function fetchClients() {
     try {
       const res = await fetch("http://localhost:8000/clients");
