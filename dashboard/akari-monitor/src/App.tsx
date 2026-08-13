@@ -20,7 +20,7 @@ function App() {
   const [clients, setClients] = useState<Clients | null>(null);
 
   /**
-   * Summary
+   * Access to the server to get client list
    * 
    * Description
    * 
