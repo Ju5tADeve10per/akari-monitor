@@ -22,7 +22,7 @@ function App() {
   /**
    * Access to the server to get client list
    * 
-   * Description
+   * Fetch the URL to get client list, if it failed, display the errors according to the error type.
    * 
    * @returns None
    */
