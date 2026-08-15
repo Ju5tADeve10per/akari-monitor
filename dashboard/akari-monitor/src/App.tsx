@@ -13,7 +13,7 @@ type Clients = Record<string, Client>;
  * 
  * Display all current clients data according to the specific format.
  * 
- * @returns None
+ * @returns void
  */
 function App() {
   /* When App is called by itself, useState is always executed first as a init trigger. */
@@ -24,7 +24,7 @@ function App() {
    * 
    * Fetch the URL to get client list, if it failed, display the errors according to the error type.
    * 
-   * @returns None
+   * @returns void
    */
   async function fetchClients() {
     try {
@@ -46,6 +46,7 @@ function App() {
     }
   }
 
+  /* Call fetchClients() every 5 seconds */
   useEffect(() => {
     fetchClients()
 
