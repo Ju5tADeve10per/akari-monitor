@@ -40,7 +40,8 @@ cd akari-monitor
 - Rust
 - Tauri
 - npm
-1. Server
+
+#### 1. Server
 
 Python仮想環境を有効化し、サーバを起動する。
 
@@ -50,7 +51,7 @@ source venv/bin/activate
 python ...
 ```
 
-2. Client
+#### 2. Client
 
 別のターミナルでクライアントを起動する。
 
@@ -60,7 +61,7 @@ source venv/bin/activate
 python ...
 ```
 
-3. Dashboard
+#### 3. Dashboard
 
 別のターミナルで管理UIを起動する。
 
